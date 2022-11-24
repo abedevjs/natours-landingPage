@@ -1,0 +1,216 @@
+.card {
+
+    //FUNCTIONALITY
+    perspective: 150rem; //perspective has to be in the parent
+    -moz-perspective: 150rem; //utk firefox
+    position: relative; //because this is the parent
+    height: 52rem; //karena dia absolute jadi height nya ke nol. klo float bisa di clearfix. tapi klo position:abso/rela, heightnya di samakan
+    
+    &__side {
+        height: 52rem; //height yang ini harus sama dengan parent nya (.card) krn berubah kena position:abso/rela
+        transition: all .8s ease; //ease dipakai untuk animasi, biar gerakannya smooth
+        position: absolute; //because they child to be positioned one top of another.
+        top: 0;
+        left: 0;
+        width: 100%; //karena dia absolute position, dia kembali ke lebar asal. makanya disini harus di kasi width sendiri lagi
+        backface-visibility: hidden; //utk menyembunyikan backpart of an element
+        border-radius: 3px;
+        overflow: hidden; //untuk mengembalikan radius di pojok kartu, karena image yang overflowing parent elementnya
+        box-shadow:  0 1.5rem 4rem rgba($color-black, .15);
+
+        &--front {
+            background-color: $color-white;
+        }
+
+        &--back {
+            background-color: green;
+            transform: rotateY(180deg); //in the beginning this side is already flipped
+
+            &-1 {
+                background-image: linear-gradient(to right bottom, $color-secondary-light, $color-secondary-dark);
+            }
+
+            &-2 {
+                background-image: linear-gradient(to right bottom, $color-primary-light, $color-primary-dark);
+            }
+
+            &-3 {
+                background-image: linear-gradient(to right bottom, $color-tertiary-light, $color-tertiary-dark);
+            }
+        }
+    }
+    &:hover &__side--front { //only the front side is rotated to -180deg, biar bergerak nya dari kanan ke kiri
+        transform: rotateY(-180deg);
+    }
+
+    &:hover &__side--back { 
+        transform: rotateY(0deg); //if it already flipped ini 180deg, then lets go back to 0deg
+    }
+
+    //FRONT SIDE STYLING
+    &__picture {
+        background-size: cover;
+        height: 23rem;
+        background-blend-mode: screen;//untuk dramatisasi begron color dan begron image, ada banyak pilihan value
+        -webkit-clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%); //urutannya webkit duluan
+        clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+        border-top-right-radius: 3px;//sbnrnya overflow sdh solusi, tapi karena ada clip path, jd harus pake solusi manual
+        border-top-left-radius: 3px;
+
+        &--1 {
+            background-image: linear-gradient(to right bottom, $color-secondary-light, $color-secondary-dark), 
+            url(../img/nat-5.jpg);
+        }
+
+        &--2 {
+            background-image: linear-gradient(to right bottom, $color-primary-light, $color-primary-dark), 
+            url(../img/nat-6.jpg);
+        }
+
+        &--3 {
+            background-image: linear-gradient(to right bottom, $color-tertiary-light, $color-tertiary-dark), 
+            url(../img/nat-7.jpg);
+        }
+    }
+
+    &__heading {
+        font-size: 2.8rem;
+        font-weight: 300;
+        text-transform: uppercase;
+        text-align: right;
+        color: $color-white;
+        position: absolute;
+        top: 12rem;
+        right: 2rem;
+        width: 75%;
+        
+    }
+
+    &__heading-span {
+        padding: 1rem 1.5rem;
+        -webkit-box-decoration-break: clone; 
+        box-decoration-break: clone; //biar seolah-olah ada 2 box, biar masing2 box dapat value padding yang sama
+
+        &--1 {
+            background-image: linear-gradient(to right bottom, 
+            rgba($color-secondary-light, .85), 
+            rgba($color-secondary-dark, .85));
+        }
+
+        &--2 {
+            background-image: linear-gradient(to right bottom, 
+            rgba($color-primary-light, .85), 
+            rgba($color-primary-dark, .85));
+        }
+
+        &--3 {
+            background-image: linear-gradient(to right bottom, 
+            rgba($color-tertiary-light, .85), 
+            rgba($color-tertiary-dark, .85));
+        }
+    }
+
+    &__details {
+        padding: 3rem;
+
+        ul {
+            list-style: none;
+            width: 80%;
+            margin: 0 auto; //cara sederhana to center a block element inside of block element
+
+            li {
+                text-align: center;
+                font-size: 1.5rem;
+                padding: 1rem;
+
+                &:not(:last-child) {
+                    border-bottom: 1px solid $color-grey-light-2;
+                }
+
+            }
+        }
+    }
+
+    //FRONT SIDE STYLING
+    &__cta {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 90%;
+        text-align: center;
+    }
+    
+    &__price-box {
+        text-align: center;
+        color: $color-white;
+        margin-bottom: 8rem;
+    }
+
+    &__price-only {
+        font-size: 1.4rem;
+        text-transform: uppercase;
+    }
+
+    &__price-value {
+        font-size: 6rem;
+        font-weight: 100;
+    }
+
+
+
+    //@include respond(tab-port)
+
+    @media only screen and (max-width: 56.25em),
+        only screen and (hover: none) { //liat penjelasan command ini di video 58, final consideration
+            //the card will be displayed when the back part is visible when the screen is smaller than 56.25 em. OR...
+            //OR whenever we using a device where we cant hover
+        
+        
+            //FUNCTIONALITY
+        height: auto; //karena dia absolute jadi height nya ke nol. klo float bisa di clearfix. tapi klo position:abso/rela, heightnya di samakan
+        border-radius: 3px;
+        background-color: $color-white;
+        box-shadow:  0 1.5rem 4rem rgba($color-black, .15);
+
+        &__side {
+            height: auto; //height yang ini harus sama dengan parent nya (.card) krn berubah kena position:abso/rela
+            position: relative; //because they child to be positioned one top of another.
+            box-shadow: none;
+            
+
+            &--back {
+                transform: rotateY(0); //in the beginning this side is already flipped
+                clip-path: polygon(0 15%, 100% 0, 100% 100%, 0 100%);
+            }
+        }
+
+        &:hover &__side--front { //only the front side is rotated to -180deg, biar bergerak nya dari kanan ke kiri
+            transform: rotateY(-0);
+        }
+
+        &__details {
+            padding: 1 3rem;
+        }
+
+        
+        //FRONT SIDE STYLING
+        &__cta {
+            position: relative;
+            top: 0;
+            left: 0;
+            transform: translate(0);
+            width: 100%;
+            padding: 7rem 4rem 4rem 4rem;
+        }
+        
+        &__price-box {
+            margin-bottom: 3rem;
+        }
+
+        &__price-value {
+            font-size: 4rem;
+        }
+
+    }
+}

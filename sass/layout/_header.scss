@@ -1,0 +1,46 @@
+.header {
+    height: 95vh;
+    background-image: linear-gradient(to right bottom,rgba($color-primary-light, 0.8), rgba($color-primary-dark, 0.8)), 
+    url(../img/hero-small.jpg); //this image will be used in normal resolution
+    background-position: top; /* klo chrome di size, img tetap stay di bagian top */
+    background-size: cover;
+    -webkit-clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%); //urutannya webkit duluan
+    clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%); /* perlu liat video lagi, atau buka situs clippy */
+    position: relative;
+
+    @media only screen and (min-resolution: 192dpi) and (min-width: 37.5em), only screen and (min-width: 125em) { //19dpi dutch per inch, resolusi retina standard dari apple. 
+        //if higher than 192dpi and min width 600px/37.5em the codes below will be applied. OR if min width 2000px/125em also the codes below will be applied
+        height: 95vh;
+        background-image: linear-gradient(to right bottom,rgba($color-primary-light, 0.8), rgba($color-primary-dark, 0.8)), 
+        url(../img/hero.jpg);
+    }
+
+    @include respond(phone) {
+        -webkit-clip-path: polygon(0 0, 100% 0, 100% 85vh, 0 100%); //urutannya webkit duluan
+        clip-path: polygon(0 0, 100% 0, 100% 85vh, 0 100%); /* perlu liat video lagi, atau buka situs clippy */
+    }
+
+    &__logo-box {
+        position: absolute;
+        top: 4rem;
+        left: 4rem;
+    }
+    
+    &__logo {
+        height: 3.5rem;
+        }
+    
+        /* animation can also happen in logo/img
+        .logo:hover {
+            animation: moveInRight 1s ease-out; }
+        */
+    
+    
+    &__text-box {
+        position: absolute;
+        top: 40%; /* this both top and left are in relation of their parent element */
+        left: 50%;
+        transform: translate(-50%, -50%); /* this in relation in the element itself */
+        text-align: center; /* karena seluruh elements dibawahnya adalah inline-blocks makanya bisa di perintah text-align */
+    }
+}

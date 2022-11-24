@@ -1,0 +1,107 @@
+.btn {
+
+    &, //tanda ini juga sekaligus include-kan button di html
+    &:link,
+    &:visited {
+        display: inline-block;
+        text-transform: uppercase;
+        text-decoration: none;
+        padding: 1.5rem 4rem;
+        border-radius: 10rem;
+        transition: all .2s;
+        position: relative;
+        transition: all .2s;
+        position: relative;
+        font-size: $default-font-size;
+
+        //Change for the Button element in section-form
+        border: none;
+        cursor: pointer;
+
+        @include respond(phone) {
+            padding: 0.5rem 3rem;
+            border-radius: 10rem;
+        }
+    }
+
+    &:hover {
+        transform: translateY(-3px); /* pakai translateY karena button bergerak dari top ke bottom. valued (minus 3px) karena dari bottom ke up */
+        box-shadow: 0 1rem 2rem rgba($color-black,.2);  /* (tebal shadow di x direction atau horizontal, tebal shadow di y direction atau vertikal, kadar ketebalan shadow) warna hitam yang diberikan efek buram 20persen */
+
+        &::after {
+            transform: scaleX(1.4) scaleY(1.6); /* it make it bigger according to his offset(horizontal/vertical) and his value */
+            opacity: 0; /* this the trick for fading somthing out. OR set something invisible */
+            
+        }
+    }
+
+    &:active,
+    &:focus {
+        outline: none;
+        transform: translateY(-1px);
+        box-shadow: 0 .5rem 1rem rgba($color-black,.2);
+    }
+
+    &--white {
+        background-color: $color-white;
+        color: $color-grey-dark;
+
+        &::after {
+            background-color: $color-white;
+        }
+    }
+
+    &--green {
+        background-color: $color-primary;
+        color: $color-white;
+
+        &::after {
+            background-color: $color-primary;
+        }
+    }
+
+    /* Pseudo elements allow us to style certain part of element */
+
+    &::after { /* after pseudo element adds a virtual element appears behind the real button then goes behind it after we select */
+        content: ""; /* it is always necessary, it can be empty, otherwise the pseudo element wont appear */
+        display: inline-block; /* it is also necessary because the real button is also an inline-block */
+        height: 100%; /* after pseudo element is basically a child to his parent element. So 100% value height means 100% as his parent element, even if his parent in pixel measure   */
+        width: 100%;
+        border-radius: 10rem;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: -1; /* z-index defines the position of an element if they are one top of another, in this case value (minus 1) is behind one another */
+        transition: all .4s;
+    }
+
+    &--animated {
+        animation: moveInBottom .5s ease-out .75s; /* (animation name, duration, timing-function, delay) */
+        animation-fill-mode: backwards; /* agar dia invisible terus muncul atau it will automatically applied the starting point (0%) before the animation starts */
+    }
+}
+
+.btn-text {
+    &:link,
+    &:visited {
+        font-size: $default-font-size;
+        color: $color-primary;
+        display: inline-block;
+        text-decoration: none;
+        border-bottom: 1px solid $color-primary;
+        padding: 3px;
+        transition: .2s;
+    }
+
+    &:hover {
+        background-color: $color-primary;
+        color: $color-white;
+        box-shadow: 0 1rem 2rem rgba($color-black, .15);
+        transform: translateY(-2px);
+    }
+
+    &:active {
+        box-shadow: 0 .5rem 1rem rgba($color-black, .15);
+        transform: translateY(0);
+    }
+}

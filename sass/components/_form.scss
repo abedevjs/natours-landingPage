@@ -1,0 +1,108 @@
+.form {
+
+    &__group:not(:last-child) {
+        margin-bottom: 2rem;
+    }
+
+    &__input {
+        font-size: 1.5rem;
+        font-family: inherit;//harus ditulis. dan inherit ke default body. karena default form html itu ada sendiri.y
+        color: inherit;
+        padding: 1.5rem 2rem;
+        border-radius: 2px;
+        background-color: rgba($color-white, .5);
+        border: none;
+        border-bottom: 3px solid transparent;
+        width: 90%;
+        display: block;
+        transition: all .3s;
+
+        @include respond(tab-port) {
+            width: 100%;
+        }
+
+        &:focus { //ini untuk inform user klo input yang mereka masukkan benar
+            outline: none;
+            box-shadow: 0 1rem 2rem rgba($color-black, .1);
+            border-bottom: 3px solid $color-primary;
+        }
+
+        &:focus:invalid { //ini untuk inform user klo input yang mereka masukkan salah
+            border-bottom: 3px solid $color-secondary-dark;
+        }
+
+        &::-webkit-input-placeholder { 
+            color: $color-grey-dark-2;
+        }
+
+    }
+
+    &__label {//ini untuk tulisan kecil yang naik turun di dalam kolom
+        font-size: 1.2rem;
+        font-weight: 700;
+        margin-left: 2rem; //biar posisinya sama dengan text diatasnya
+        margin-top: .7rem;
+        display: block;
+        transition: all .3s;
+    }
+
+    &__input:placeholder-shown + &__label { //mereka '+' karena mereka siblings jd bisa di style bersamaan
+        opacity: 0; //ini untuk tulisan kecil
+        visibility: hidden;
+        transform: translateY(-4rem);
+    }
+
+    &__radio-group {
+        width: 49%;
+        display: inline-block;
+
+        @include respond(tab-port) {
+            width: 100%;
+            margin-bottom: 2rem;
+        }
+    }
+
+    &__radio-input { //ini tombol kecil yang asli dari html 
+        display: none;
+    }
+
+    &__radio-label {
+        font-size: $default-font-size;
+        cursor: pointer;
+        position: relative;
+        padding-left: 4.5rem;
+    }
+
+    &__radio-button { //this is the big circle
+        display: inline-block;
+        height: 3rem;
+        width: 3rem;
+        border: 5px solid $color-primary;
+        border-radius: 50%;
+        position: absolute;
+        left: 0;
+        top: -.4rem;
+
+        &::after { //this is for the dot inside the circle
+            content: "";//remember to write a content on pseudo element
+            display: block;
+            height: 1.3rem;
+            width: 1.3rem;
+            border-radius: 50%;
+            position: absolute; //krn parent nya juga sudah absolute, tdk masalah. tp gpp yang penting parentnya harus di specified
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: $color-primary;
+            opacity: 0;
+            transition: opacity .2s;
+        }
+    }
+
+    &__radio-input:checked ~ &__radio-label &__radio-button::after { 
+        // ini untuk lingkaran kecil dalam button bisa tercentang klo dipilih
+        // dipilih dulu radio-input, terus siblingnya radio-label dgn tanda ~, terus child dari siblingnya itu radio-button
+        // dan akhirnya after pseudo element
+        opacity: 1;
+    }
+}

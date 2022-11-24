@@ -1,0 +1,17 @@
+.bg-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100% ;
+    z-index: -1;//it must be really low so it positioned under everything. and cek the begrond section, if any we should
+                //delete that begrond
+    opacity: .15;  
+    //overflow: hidden;...buat jaga2 aja klo dy overflow parent elementnya (karena position absolute)
+    
+    &__content {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;//banyak value disini. klo cover, dy maintain aspect ratio
+    }
+}

@@ -1,0 +1,43 @@
+@keyframes moveInLeft { /* untuk membuat animasi, moveInLeft karena tulisannya nanti bergerak dari kiri */
+    0% {    /* starting point */
+        opacity: 0; /* because in the beginning we want it to be invisible */
+        transform: translateX(-10rem) /* translateX maksudnya dy datang dari horizontal. value (minus100) artinya datang dari kiri ke kanan */
+    }
+    
+    80% {   /* if we want something happen in the middle */
+        transform: translateX(1rem); /* value at (plus10) because we want it to move right a little bit before back to normal/initial position */
+    }
+    
+    100% {  /* finishing point */
+        opacity: 1; /* because at the end we want it to appear normal again */
+        transform: translate(0); /* value translate at (0) because the way it looked now is at (0) */
+    }
+}
+
+@keyframes moveInRight { /* untuk membuat animasi, moveInRight karena tulisannya nanti bergerak dari kanan */
+    0% {    /* starting point */
+        opacity: 0; /* because in the beginning we want it to be invisible */
+        transform: translateX(10rem) /* translateX maksudnya dy datang dari horizontal. value (plus100) artinya datang dari kanan ke kiri */
+    }
+    
+    80% {   /* if we want something happen in the middle */
+        transform: translateX(-1rem); /* value at (minus10) because we want it to move left a little bit before back to normal/initial position */
+    }
+    
+    100% {  /* finishing point */
+        opacity: 1; /* because at the end we want it to appear normal again */
+        transform: translate(0); /* value translate at (0) because the way it looked now is at (0) */
+    }
+}
+
+@keyframes moveInBottom { /* untuk membuat animasi, moveInBottom karena tulisannya nanti bergerak dari bawah */
+    0% {    /* starting point */
+        opacity: 0; /* because in the beginning we want it to be invisible */
+        transform: translateY(3rem)/* translateY maksudnya dy datang dari vertical. value (plus30) artinya datang dari bottom to top */
+    }
+    
+    100% {  /* finishing point */
+        opacity: 1; /* because at the end we want it to appear normal again */
+        transform: translate(0); /* value translate at (0) because the way it looked now is at (0) */
+    }
+}

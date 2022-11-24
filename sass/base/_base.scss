@@ -1,0 +1,50 @@
+*,
+*::after,
+*::before {
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit; /* it will force the inheritance of box-sizing of their parent */
+}
+
+html {
+    font-size: 62.5%; /* we called this font-size because this is a global rule of size. not just he rules font size but also length such as padding, margin, width etc. and this valued in percent of 16 px user default browser just in case he adjust the font size because eye weakness. jadi angka 62.5% itu di dapat dari 10px/16px = 0.625. kita jadi kan persen 62.5%, jadi misalnya 1rem = 10px trus 62.5% =  16px maka 1rem = 10px */
+
+    /*@include respond(phone) {
+        font-size: 50%;
+    } karena ini sama dngan dibawah font-size: 50%; */
+
+    //jd urutannya disini ukuran yang besar duluan ke ukuran yang kecil, karena kita design dr ukuran pc ke hp.
+    // klo kita design dari hp ke pc, jd urutannya dari kecil ke besar. liat video 49, writng media queries
+
+    @include respond(tab-land) { //width less than 1200
+        //disini saya mau 1rem = 9px. Maka, 9/16 = 0.5625
+        font-size: 56.25%;
+    }
+
+    @include respond(tab-port) { //width less than 900
+        font-size: 50%; // disini saya mau 1rem = 8px. Maka, 8/16 = 0.5
+    }
+
+    /*@include respond(phone) { //width less than 600
+        font-size: 30%; // disini saya mau 1rem = 4.8px. Maka, 4.8/16 = 0.3
+    }*/
+
+    @include respond(big-desktop) { //disini saya mau 1rem = 12px. Maka, 12/16 = 0.75
+        font-size: 75%;
+    }
+}
+
+body {
+    
+    box-sizing: border-box;
+    padding: 3rem; /* padding will get inheritance if only specified with 1 format size */
+
+    @include respond(tab-port) { //width less than 900
+        padding: 0;
+    }
+}
+
+::selection {
+    background-color: $color-primary;
+    color: $color-white;
+}
